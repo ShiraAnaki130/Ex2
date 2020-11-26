@@ -7,10 +7,10 @@ int count=0;
 double ifOpen=0;
 void O(double amount){
     if(count!=50){
-        count++;
         bank_account[count][0]=amount;
         bank_account[count][1]=1;
-        printf("The number of your new account is :%d\n",900+count); 
+        count+=1;
+        printf("New account number is:%d\n",900+count); 
     }
     else {
         printf("Opening new account is'nt possible because the accounts' number above 50\n");
@@ -22,14 +22,14 @@ void B(int account_number){
         ifOpen=bank_account[index][1];
         if(ifOpen==1){
             double balance=bank_account[index][0];
-            printf("The balance of your account with the number of :%d is :%0.2lf\n",account_number,balance);
+            printf("The balance of account number %d is: %0.2lf\n",account_number,balance);
         }
         else{
-        printf("The account with the number of : %d is close, checking balance is'nt possible\n",account_number);
+        printf("This account is closed\n");
         }
     }
     else{
-        printf("your account number isn't existent\n");
+        printf("This account number isn't existent\n");
     }
 }
 void D(int account_number,double amount){
@@ -42,11 +42,11 @@ void D(int account_number,double amount){
             printf("The new balance of your account with the number of :%d is :%0.2lf\n",account_number,balance);
         }
         else {
-            printf("The account with the number of : %d is close, depositing money is'nt possible\n",account_number);
+            printf("This account is closed\n");
         }
     }
     else{
-        printf("your account number isn't existent\n");
+        printf("This account number isn't existent\n");
     }
 }
 void W(int account_number,double amount){
@@ -56,19 +56,21 @@ void W(int account_number,double amount){
         if(ifOpen==1){
             double balance=bank_account[index][0];
             if(amount>balance){
-                printf("There's not enough money to withdraw from your account\n");
+                printf("Cannot withdraw more that the balance\n");
             }
             else{
-                bank_account[index][0]-=amount;
-                printf("The new balance of your account with the number of :%d  is :%0.2lf\n",account_number,balance);
+                double balance=bank_account[index][0];
+                balance-=amount;
+                bank_account[index][0]=balance;
+                printf("The new balance is: %0.2lf\n",balance);
             }
         }
         else {
-            printf("The account with the number of :%d  is close - withdrawing money is'nt possible\n",account_number);
+            printf("This account is closed\n");
         }
     }
     else{
-        printf("your account number isn't existent\n");
+        printf("This account number isn't existent\n");
     }
 }
 void C(int account_number){
@@ -80,11 +82,11 @@ void C(int account_number){
             bank_account[index][1]=0;
         }
         else {
-        printf("The account with the number of :%d  is already close- closing the account is'nt possible\n",account_number);
+        printf("This account is closed\n");
         }
     }
     else{
-        printf("your account number isn't existent\n");
+        printf("This account number isn't existent\n");
     }
 }
 void I(double interest_rate){
@@ -101,7 +103,7 @@ void P(){
         if(bank_account[i][1]==1){
             index=900+i+1;
             balance=bank_account[i][0];
-            printf("the account's number is :%d  and it balance is :%0.2lf\n",index,balance);
+            printf("The balance of account number %d is: %0.2lf\n",index,balance);
         }
     }
 }
