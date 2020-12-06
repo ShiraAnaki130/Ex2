@@ -1,8 +1,8 @@
 void O(double amount);
 void B(int account_number);
-void D(int account_number,double amount);
-void W(int account_number,double amount);
+void D(int account_number);
+void W(int account_number);
 void C(int account_number);
-void I(double interest_rate);
+void I();
 void P();
 void E();

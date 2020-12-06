@@ -29,31 +29,43 @@ void B(int account_number){
         }
     }
     else{
-        printf("This account number isn't existent\n");
+        printf("Invalid account number.\n");
     }
 }
-void D(int account_number,double amount){
+void D(int account_number){
     int index=account_number-901;
-    if((index>=0 && index<=49)){
-        ifOpen=bank_account[index][1];
+    ifOpen=bank_account[index][1];
         if(ifOpen==1){
-            bank_account[index][0]+=amount;
-            double balance=bank_account[index][0];
-            printf("The new balance of your account with the number of :%d is :%0.2lf\n",account_number,balance);
+            double amount;
+            printf("Please enter the amount to deposit:");
+            if(scanf("%lf",&amount)!=1){
+                printf("Failed to read the the amount\n");
+            }
+            else {
+                if(amount<0){
+                    printf("Cannot deposit a negative amount.\n");
+                }
+                else{
+                    bank_account[index][0]+=amount;
+                    double balance=bank_account[index][0];
+                    printf("The new balance is: %0.2lf\n",balance);
+                }
+            }
         }
         else {
             printf("This account is closed\n");
         }
-    }
-    else{
-        printf("This account number isn't existent\n");
-    }
 }
-void W(int account_number,double amount){
+void W(int account_number){
     int index=account_number-901;
-    if((index>=0 && index<=49)){
-        ifOpen=bank_account[index][1];
-        if(ifOpen==1){
+    ifOpen=bank_account[index][1];
+    if(ifOpen==1){
+        double amount;
+        printf("Please enter the amount to withdraw:");
+        if(scanf("%lf",&amount)!=1){
+            printf("Failed to read the the amount\n");
+        }
+        else{  
             double balance=bank_account[index][0];
             if(amount>balance){
                 printf("Cannot withdraw more that the balance\n");
@@ -65,12 +77,9 @@ void W(int account_number,double amount){
                 printf("The new balance is: %0.2lf\n",balance);
             }
         }
-        else {
-            printf("This account is closed\n");
-        }
     }
     else{
-        printf("This account number isn't existent\n");
+        printf("This account is closed\n");
     }
 }
 void C(int account_number){
@@ -80,21 +89,33 @@ void C(int account_number){
         if(ifOpen==1){
             bank_account[index][0]=0;
             bank_account[index][1]=0;
+            count-=1;
+            printf("Closed account number %d\n",account_number);
         }
         else {
-        printf("This account is closed\n");
+        printf("This account is already closed\n");
         }
     }
     else{
-        printf("This account number isn't existent\n");
+        printf("Invalid account number.\n");
     }
 }
-void I(double interest_rate){
+void I(){
+    int rate;
+    printf("Please enter intreset rate:");
+    if(scanf("%d",&rate)!=1){
+        printf("Failed to read the interest ratet\n");
+    }
+    if(rate<0){
+        printf("Invalid interest rate\n");
+               
+    }
     for(int i=0;i<N;i++){
         if(bank_account[i][1]==1){
-           bank_account[i][0]*=(1+interest_rate/100);   
+           bank_account[i][0]*=(1+rate/100);   
         }
     }
+    printf("\n");
 }
 void P(){
     double balance;
@@ -113,5 +134,5 @@ void E(){
             bank_account[i][j]=0;
         }
     }
-   
+    count=0;  
 }
